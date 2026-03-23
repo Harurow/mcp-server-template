@@ -1,6 +1,6 @@
-# harness-mcp-server
+# mcp-server-template
 
-[![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
+[![CI](https://github.com/Harurow/mcp-server-template/actions/workflows/ci.yml/badge.svg)](https://github.com/Harurow/mcp-server-template/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io) サーバーテンプレート。ハーネスエンジニアリングのベストプラクティスを組み込み済み。

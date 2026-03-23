@@ -41,14 +41,16 @@ for f in package.json src/server.ts CLAUDE.md AGENTS.md README.md README.ja.md C
   [ -f "$f" ] && sedi "s/harness-mcp-server/$NAME/g" "$f"
 done
 
-# Replace GitHub USER/REPO placeholder
-for f in README.md README.ja.md CHANGELOG.md; do
-  [ -f "$f" ] && sedi "s|USER/REPO|$REPO_SLUG|g" "$f"
+# Replace template repo references with new project
+for f in README.md README.ja.md; do
+  [ -f "$f" ] && sedi "s|# mcp-server-template|# $NAME|g" "$f"
+  [ -f "$f" ] && sedi "s|Harurow/mcp-server-template|$REPO_SLUG|g" "$f"
+  [ -f "$f" ] && sedi "s|cd REPO|cd $NAME|g" "$f"
 done
 
-# Replace REPO in clone instructions
-for f in README.md README.ja.md; do
-  [ -f "$f" ] && sedi "s|cd REPO|cd $NAME|g" "$f"
+# Replace remaining USER/REPO placeholders (CHANGELOG etc.)
+for f in CHANGELOG.md; do
+  [ -f "$f" ] && sedi "s|USER/REPO|$REPO_SLUG|g" "$f"
 done
 
 # Replace LICENSE copyright holder
