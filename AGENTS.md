@@ -27,12 +27,26 @@ npm run typecheck     # tsc --noEmit
 - No `console.log` in src/ (breaks STDIO transport)
 - No `eval()`, `new Function()`, template string in `exec()`
 - Errors must use McpError, not raw throw
+- No deprecated APIs, packages, or features — see `.claude/rules/deprecated-rules.md`
+
+## Documentation Sync
+
+- When adding, changing, or removing features, update related docs in the same PR
+  - Targets: README.md, README.ja.md, CLAUDE.md, AGENTS.md, CHANGELOG.md, docs/adr/
+- If you find outdated docs, create a PR to fix them — don't leave them stale
+
+## Proactive Improvement
+
+- When you find bugs, inconsistencies, or improvements, create a feature branch and submit a fix PR
+- Prefer "small PR now" over "noticed but ignored"
+- For larger fixes, create an Issue to track
+- If a fix involves a design decision (meets ADR criteria), include the ADR in the same PR
 
 ## Commit Rules
 
 - 1 commit = 1 logical change. Do not mix unrelated changes
 - Format: `<type>: <description>` (types: feat, fix, chore, docs, refactor, test)
-- Before committing: verify diff, check for contradictions, confirm no missing updates
+- Before committing: verify diff, check for contradictions, confirm no missing updates, verify doc sync
 
 ## Branch Rules
 
