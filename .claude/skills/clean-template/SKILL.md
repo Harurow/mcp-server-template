@@ -42,6 +42,7 @@ user-invocable: true
 
 4. **README からテンプレート固有の記述を削除する**
    `README.md` と `README.ja.md` の両方で:
+   - `<!-- TEMPLATE_START -->` 〜 `<!-- TEMPLATE_END -->` セクションが残っていれば丸ごと削除
    - Features セクションの "Harness engineering" / "ハーネスエンジニアリング" 行を削除
    - "harness engineering best practices" / "ハーネスエンジニアリングのベストプラクティスを組み込み済み" を汎用的な記述に変更:
      - EN: "server template with quality engineering best practices."
