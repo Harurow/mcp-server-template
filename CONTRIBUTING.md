@@ -81,6 +81,27 @@ Types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`
 3. `test/<name>.test.ts` — `createTestContext()` を使ったテスト
 4. CHANGELOG.md の `[Unreleased]` セクションに追記
 
+## Architecture Decision Records (ADR)
+
+設計上の判断は `docs/adr/` に ADR として記録する。テンプレート: `docs/adr/0000-template.md`
+
+### ADR を書くべきとき
+
+- 複数の選択肢を比較検討して判断した場合（例: ライブラリ選定、アーキテクチャ方針）
+- コードだけでは「なぜそうしたか」が分からない設計判断（例: プレースホルダー戦略の変更）
+- 将来のメンテナで同じ議論を繰り返さないために記録が必要な場合
+- バグや問題の根本原因が設計上の判断に起因する場合
+
+### ADR を書かなくてよいとき
+
+- 単純なバグ修正（コミットメッセージで十分）
+- 明らかに一択しかない変更
+- 一時的なワークアラウンド（Issue で追跡する）
+
+### フォーマット
+
+採番: `0001-` から連番。状態: `Proposed` → `Accepted` → `Superseded` or `Deprecated`
+
 ## Quality Gates
 
 Pre-commit (Lefthook) と CI の両方で以下を強制:

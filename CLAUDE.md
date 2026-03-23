@@ -23,6 +23,11 @@ npm run inspect       # MCP Inspector で動作確認
 - エラーは McpError を使用。生の throw 禁止
 - `any` 型禁止。不明な外部入力は `unknown` → Zod parse
 - ADR: docs/adr/ (採番: 0001-, 状態: Proposed/Accepted/Superseded/Deprecated)
+  - 以下の場合に ADR を作成すること:
+    - 複数の選択肢を比較検討して判断した場合
+    - コードだけでは「なぜそうしたか」が分からない設計判断
+    - 将来のメンテナで同じ議論を繰り返さないために記録が必要な場合
+    - バグや問題の根本原因が設計上の判断に起因する場合
 
 ## Adding a New Tool
 

@@ -17,6 +17,7 @@ npm run typecheck     # tsc --noEmit
 - `src/tools/` — one file per tool, filename = tool name
 - `test/` — vitest tests using InMemoryTransport (`test/helpers.ts` has `createTestContext`)
 - `docs/adr/` — Architecture Decision Records (template: `0000-template.md`)
+  - Write an ADR when: choosing between alternatives, making a non-obvious design decision, encountering a bug caused by a design choice, or recording context that code alone cannot convey
 
 ## Rules
 
