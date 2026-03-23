@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'if [ \"${HARNESS_STOP_HOOK_ACTIVE:-}\" = \"1\" ]; then exit 0; fi; export HARNESS_STOP_HOOK_ACTIVE=1; if [ -d test ] && ls test/*.test.ts 1>/dev/null 2>&1; then npx vitest run --reporter=dot 2>&1 | tail -30; fi'"
+            "command": "bash -c 'if [ \"${MCP_STOP_HOOK_ACTIVE:-}\" = \"1\" ]; then exit 0; fi; export MCP_STOP_HOOK_ACTIVE=1; if [ -d test ] && ls test/*.test.ts 1>/dev/null 2>&1; then npx vitest run --reporter=dot 2>&1 | tail -30; fi'"
           }
         ]
       }

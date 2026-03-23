@@ -1,4 +1,4 @@
-# harness-mcp-server
+# my-mcp-server
 
 MCP (Model Context Protocol) server — Node.js + TypeScript.
 Cross-agent instructions: @AGENTS.md

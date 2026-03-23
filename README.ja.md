@@ -20,14 +20,14 @@
 ### npx で直接実行（インストール不要）
 
 ```bash
-npx harness-mcp-server
+npx my-mcp-server
 ```
 
 ### npm でグローバルインストール
 
 ```bash
-npm install -g harness-mcp-server
-harness-mcp-server
+npm install -g my-mcp-server
+my-mcp-server
 ```
 
 ### リポジトリをクローンして使う
@@ -152,9 +152,9 @@ MCP クライアント（例: Claude Desktop）の設定に追加:
 ```json
 {
   "mcpServers": {
-    "harness-mcp-server": {
+    "my-mcp-server": {
       "command": "npx",
-      "args": ["-y", "harness-mcp-server"]
+      "args": ["-y", "my-mcp-server"]
     }
   }
 }
@@ -165,7 +165,7 @@ MCP クライアント（例: Claude Desktop）の設定に追加:
 ```json
 {
   "mcpServers": {
-    "harness-mcp-server": {
+    "my-mcp-server": {
       "command": "node",
       "args": ["/absolute/path/to/dist/index.js"]
     }
