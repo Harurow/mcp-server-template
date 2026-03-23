@@ -2,7 +2,6 @@
 name: clean-template
 description: 初期化済みプロジェクトからテンプレート固有の残留物を削除する
 user-invocable: true
-argument-hint: ""
 ---
 
 # テンプレートクリーンアップスキル
