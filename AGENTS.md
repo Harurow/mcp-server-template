@@ -1,4 +1,4 @@
-# harness-mcp-server
+# my-mcp-server
 
 MCP server built with Node.js + TypeScript.
 

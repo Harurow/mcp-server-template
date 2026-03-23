@@ -1,5 +1,5 @@
 {
-  "name": "harness-mcp-server",
+  "name": "my-mcp-server",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -10,7 +10,7 @@
     "dist"
   ],
   "bin": {
-    "harness-mcp-server": "dist/index.js"
+    "my-mcp-server": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",

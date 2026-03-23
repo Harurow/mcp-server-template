@@ -3,7 +3,7 @@ import { registerGreetTool } from "./tools/greet.js";
 
 export function createServer(): McpServer {
 	const server = new McpServer({
-		name: "harness-mcp-server",
+		name: "my-mcp-server",
 		version: "0.1.0",
 	});
 

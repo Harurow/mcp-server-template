@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial MCP server template with harness engineering setup
+- Initial MCP server template setup
 - Oxlint + Biome linter/formatter configuration
 - Lefthook pre-commit hooks (lint + typecheck + test + coverage)
 - Claude Code hooks (PostToolUse auto-format, PreToolUse config protection, Stop test gate)

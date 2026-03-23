@@ -38,7 +38,7 @@ sedi() {
 
 # Replace project name in all relevant files
 for f in package.json src/server.ts CLAUDE.md AGENTS.md README.md README.ja.md CHANGELOG.md .env.example; do
-  [ -f "$f" ] && sedi "s/harness-mcp-server/$NAME/g" "$f"
+  [ -f "$f" ] && sedi "s/my-mcp-server/$NAME/g" "$f"
 done
 
 # Replace template repo references with new project

@@ -20,14 +20,14 @@
 ### Run directly with npx (no install)
 
 ```bash
-npx harness-mcp-server
+npx my-mcp-server
 ```
 
 ### Install globally with npm
 
 ```bash
-npm install -g harness-mcp-server
-harness-mcp-server
+npm install -g my-mcp-server
+my-mcp-server
 ```
 
 ### Clone from repository
@@ -152,9 +152,9 @@ Add to your MCP client config (e.g. Claude Desktop):
 ```json
 {
   "mcpServers": {
-    "harness-mcp-server": {
+    "my-mcp-server": {
       "command": "npx",
-      "args": ["-y", "harness-mcp-server"]
+      "args": ["-y", "my-mcp-server"]
     }
   }
 }
@@ -165,7 +165,7 @@ Or if installed globally or cloned locally:
 ```json
 {
   "mcpServers": {
-    "harness-mcp-server": {
+    "my-mcp-server": {
       "command": "node",
       "args": ["/absolute/path/to/dist/index.js"]
     }

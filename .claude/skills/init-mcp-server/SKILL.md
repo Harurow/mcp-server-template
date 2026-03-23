@@ -30,7 +30,7 @@ argument-hint: "<server-name> [dest] [github-owner]"
    ```
 
 3. **プロジェクト名を置換する**
-   以下のファイル内の `harness-mcp-server` を `<server-name>` に一括置換:
+   以下のファイル内の `my-mcp-server` を `<server-name>` に一括置換:
    - `package.json` (name + bin)
    - `src/server.ts` (McpServer name)
    - `CLAUDE.md`, `AGENTS.md`, `README.md`, `README.ja.md`, `CHANGELOG.md`, `.env.example`
