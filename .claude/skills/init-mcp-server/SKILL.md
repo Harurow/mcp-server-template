@@ -64,34 +64,74 @@ argument-hint: "<server-name> [dest] [github-owner]"
    ```
    `scripts/setup-branch-protection.sh` は残す
 
-8. **Git を初期化する**
+8. **テンプレート固有の ADR を削除し、プロジェクト用 ADR を生成する**
+   - 以下のテンプレート固有 ADR を削除する:
+     - `docs/adr/0001-harness-engineering-setup.md`
+     - `docs/adr/0002-template-vs-project-values.md`
+   - `docs/adr/0000-template.md` は残す（ADR テンプレート）
+   - `docs/adr/0001-technology-stack.md` を以下の内容で生成する:
+
+     ```markdown
+     # ADR-0001: 技術スタック選定
+
+     - Status: Accepted
+     - Date: <初期化実行日>
+
+     ## Context
+
+     MCP Server の開発基盤として、品質・速度・AI エージェントとの親和性を重視して技術スタックを選定する必要がある。
+
+     ## Decision
+
+     | カテゴリ | 選定 | 却下した代替案 | 理由 |
+     |---------|------|--------------|------|
+     | テストフレームワーク | vitest | Jest | ESM ネイティブ対応、TypeScript 設定不要、高速 |
+     | リンター | Oxlint | ESLint | Rust 製で高速、PostToolUse Hook での自動実行に適合 |
+     | フォーマッター | Biome | Prettier | Rust 製で高速、リンターとフォーマッターを一体化可能 |
+     | プリコミットフック | Lefthook | husky + lint-staged | 設定がシンプル、並列実行対応、Go 製で高速 |
+     | 入力バリデーション | Zod | joi, yup, io-ts | TypeScript 型推論との統合が最も優れている |
+
+     ### 追加の設計判断
+
+     - **`console.log` 禁止**: MCP は STDIO transport を使用するため、stdout への出力はプロトコルを破壊する。デバッグ出力は `console.error` (stderr) を使用する
+     - **`any` 型禁止**: 外部入力は `unknown` で受け取り、Zod でパースすることで型安全性を確保する
+     - **Named export のみ**: Default export はリファクタリング時の追跡が困難で、ツリーシェイキングにも不利
+
+     ## Consequences
+
+     - Rust/Go 製ツールの採用により、CI とローカルフックの実行速度が大幅に向上する
+     - Zod スキーマが入力バリデーションと TypeScript 型定義の Single Source of Truth となる
+     - ESLint/Prettier エコシステムのプラグイン資産は利用できないが、MCP Server の規模では問題にならない
+     ```
+
+9. **Git を初期化する**
    ```bash
    cd <dest>
    git init
    ```
 
-9. **依存関係をインストールする**
+10. **依存関係をインストールする**
    ```bash
    npm install
    npx lefthook install
    ```
 
-10. **検証する**
+11. **検証する**
     ```bash
     npx tsc --noEmit
     npx oxlint src/ && npx biome check src/
     ```
 
-11. **初期コミットを作成する**（テストファイルがないため `--no-verify` を使用）
+12. **初期コミットを作成する**（テストファイルがないため `--no-verify` を使用）
     ```bash
     git add -A
     git commit -m "Initial commit from mcp-server template" --no-verify
     ```
 
-12. **npm 公開予定がある場合**
+13. **npm 公開予定がある場合**
     `package.json` の `"private": true` を削除する旨を案内する
 
-13. **次のステップを案内する**
+14. **次のステップを案内する**
     完了後、以下を伝える:
     - `src/tools/<name>.ts` にツールを追加
     - `src/server.ts` で登録
