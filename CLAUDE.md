@@ -35,12 +35,25 @@ npm run inspect       # MCP Inspector で動作確認
 2. `src/server.ts` でインポート・登録
 3. `test/<name>.test.ts` に InMemoryTransport テスト追加 (`test/helpers.ts` の `createTestContext` を使用)
 
+## Documentation Sync
+
+- 機能追加・変更・削除時は、関連するドキュメントを必ず同じ PR 内で更新する
+  - 対象: README.md, README.ja.md, CLAUDE.md, AGENTS.md, CHANGELOG.md, docs/adr/
+- ドキュメントだけが古い場合も修正対象。見つけたら放置せず PR を作成する
+
+## Proactive Improvement
+
+- バグ・不整合・改善点を発見した場合は、積極的に feature branch を切って修正 PR を作成する
+- 「気づいたが放置」より「小さくても PR を出す」を優先する
+- 修正範囲が大きい場合は Issue を作成して追跡する
+- 修正が設計判断を伴う場合（ADR 作成基準に該当する場合）は ADR も同じ PR に含める
+
 ## Commit Rules
 
 コミットルール詳細: `.claude/rules/commit-rules.md`
 
 - 1コミット = 1つの論理的変更。複数の変更を混ぜない
-- コミット前に必ず: diff確認 → 矛盾チェック → 修正漏れ確認 → 誤字脱字確認
+- コミット前に必ず: diff確認 → 矛盾チェック → 修正漏れ確認 → ドキュメント同期確認 → 誤字脱字確認
 - テスト + カバレッジ + typecheck + lint が全て通ること
 
 ## Prohibited
@@ -50,3 +63,4 @@ npm run inspect       # MCP Inspector で動作確認
 - Default export（Named export のみ）
 - `.env` / `.env.*` ファイルの直接編集
 - 設定ファイル (biome.json, tsconfig.json, vitest.config.ts, lefthook.yml, .claude/settings.json) の変更
+- 非推奨 (deprecated) な API・パッケージ・機能の使用。詳細: `.claude/rules/deprecated-rules.md`
