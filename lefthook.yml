@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint-ts:
+      glob: "*.{ts,tsx}"
+      run: npx oxlint {staged_files} && npx biome check {staged_files}
+    type-check:
+      run: npx tsc --noEmit
+    test-coverage:
+      run: npx vitest run --coverage --reporter=dot

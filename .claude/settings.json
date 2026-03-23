@@ -1,0 +1,44 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git commit --no-verify*)",
+      "Bash(git push --force*)",
+      "Bash(rm -rf*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // .tool_input.path // empty\" <<< \"$(cat)\"); PROTECTED=\"biome.json tsconfig.json vitest.config.ts lefthook.yml .eslintrc eslint.config .prettierrc .env .env.local .env.production .claude/settings.json\"; for p in $PROTECTED; do case \"$FILE\" in *$p*) echo \"BLOCKED: $FILE is protected. Fix code, not config.\" >&2; exit 2;; esac; done'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-ts-lint.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'if [ \"${HARNESS_STOP_HOOK_ACTIVE:-}\" = \"1\" ]; then exit 0; fi; export HARNESS_STOP_HOOK_ACTIVE=1; if [ -d test ] && ls test/*.test.ts 1>/dev/null 2>&1; then npx vitest run --reporter=dot 2>&1 | tail -30; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
