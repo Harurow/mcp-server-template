@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // .tool_input.path // empty\" <<< \"$(cat)\"); PROTECTED=\"biome.json tsconfig.json vitest.config.ts lefthook.yml .eslintrc eslint.config .prettierrc .env .env.local .env.production .claude/settings.json\"; for p in $PROTECTED; do case \"$FILE\" in *$p*) echo \"BLOCKED: $FILE is protected. Fix code, not config.\" >&2; exit 2;; esac; done'"
+            "command": "bash -c 'FILE=$(jq -r \".tool_input.file_path // .tool_input.path // empty\" <<< \"$(cat)\"); case \"$FILE\" in *.example) exit 0;; esac; PROTECTED=\"biome.json tsconfig.json vitest.config.ts lefthook.yml .eslintrc eslint.config .prettierrc .env .env.local .env.production .claude/settings.json\"; for p in $PROTECTED; do case \"$FILE\" in *$p*) echo \"BLOCKED: $FILE is protected. Fix code, not config.\" >&2; exit 2;; esac; done'"
           }
         ]
       }
