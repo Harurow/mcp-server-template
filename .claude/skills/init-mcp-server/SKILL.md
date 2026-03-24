@@ -129,6 +129,10 @@ argument-hint: "<server-name> [dest] [github-owner]"
     - "harness engineering best practices" / "ハーネスエンジニアリングのベストプラクティスを組み込み済み" を汎用的な記述に変更:
       - EN: "server template with quality engineering best practices."
       - JA: "サーバーテンプレート。品質エンジニアリングのベストプラクティスを組み込み済み。"
+    - **注意: 上記以外のセクションは変更しない。** 特に以下は全てそのまま残すこと:
+      - Installation セクション（npx / グローバルインストール / クローンの3パターン）
+      - MCP Client Configuration セクション（npx 方式と node 方式の両方の JSON 設定例）
+      - Development, Adding a Tool, Project Structure 等の全セクション
 
 11. **初期化スキル群を削除する**（初期化済みプロジェクトには不要）
     ```bash
