@@ -3,11 +3,11 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { createServer } from "./server.js";
 
 async function main(): Promise<void> {
-	const server = createServer();
-	await server.connect(new StdioServerTransport());
+  const server = createServer();
+  await server.connect(new StdioServerTransport());
 }
 
 main().catch((error: unknown) => {
-	console.error("Fatal error:", error);
-	process.exit(1);
+  console.error("Fatal error:", error);
+  process.exit(1);
 });
