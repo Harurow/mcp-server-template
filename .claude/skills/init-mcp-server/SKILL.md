@@ -8,6 +8,7 @@ argument-hint: "<server-name> [dest] [github-owner]"
 # MCP Server 初期化スキル
 
 テンプレート (`~/code/mcp-server-template`) から新しい MCP Server プロジェクトを作成する。
+テンプレート固有の残留物の除去、プロジェクト用 ADR の生成、Git 初期化までを一括で行う。
 
 ## 引数
 
@@ -16,6 +17,8 @@ argument-hint: "<server-name> [dest] [github-owner]"
 - `$2` — github-owner (省略時: `gh api user -q '.login'` で自動取得)
 
 ## 手順
+
+### Phase 1: コピーと置換
 
 1. **引数を検証する**
    - `$0` (server-name) が kebab-case であることを確認 (`^[a-z][a-z0-9-]*$`)
@@ -58,7 +61,9 @@ argument-hint: "<server-name> [dest] [github-owner]"
      }
      ```
 
-7. **init スクリプトを削除する**（初期化済みプロジェクトには不要）
+### Phase 2: テンプレート残留物の除去
+
+7. **init スクリプトを削除する**
    ```bash
    rm -f scripts/init.sh
    ```
@@ -104,34 +109,65 @@ argument-hint: "<server-name> [dest] [github-owner]"
      - ESLint/Prettier エコシステムのプラグイン資産は利用できないが、MCP Server の規模では問題にならない
      ```
 
-9. **Git を初期化する**
-   ```bash
-   cd <dest>
-   git init
+9. **CHANGELOG をリセットする**
+   テンプレートの初期エントリを削除し、以下の内容に置き換える:
+   ```markdown
+   # Changelog
+
+   All notable changes to this project will be documented in this file.
+
+   The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+   and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+   ## [Unreleased]
    ```
 
-10. **依存関係をインストールする**
-   ```bash
-   npm install
-   npx lefthook install
-   ```
+10. **README からテンプレート固有の記述を削除する**
+    `README.md` と `README.ja.md` の両方で:
+    - `<!-- TEMPLATE_START -->` 〜 `<!-- TEMPLATE_END -->` セクションが残っていれば丸ごと削除
+    - Features セクションの "Harness engineering" / "ハーネスエンジニアリング" 行を削除
+    - "harness engineering best practices" / "ハーネスエンジニアリングのベストプラクティスを組み込み済み" を汎用的な記述に変更:
+      - EN: "server template with quality engineering best practices."
+      - JA: "サーバーテンプレート。品質エンジニアリングのベストプラクティスを組み込み済み。"
 
-11. **検証する**
+11. **初期化スキル群を削除する**（初期化済みプロジェクトには不要）
+    ```bash
+    rm -rf .claude/skills/init-mcp-server
+    rm -rf .claude/skills/clean-template
+    ```
+
+12. **テンプレート残留物を検証する**
+    - `grep -ri harness` でテンプレート固有の参照が残っていないか確認
+    - 残っている場合はユーザーに報告し、削除するか確認する
+
+### Phase 3: ビルド環境構築と Git 初期化
+
+13. **依存関係をインストールする**
+    ```bash
+    cd <dest>
+    npm install
+    npx lefthook install
+    ```
+
+14. **検証する**
     ```bash
     npx tsc --noEmit
     npx oxlint src/ && npx biome check src/
     ```
 
-12. **初期コミットを作成する**（テストファイルがないため `--no-verify` を使用）
+15. **Git を初期化し、初期コミットを作成する**（テストファイルがないため `--no-verify` を使用）
     ```bash
+    git init
     git add -A
     git commit -m "Initial commit from mcp-server template" --no-verify
     ```
 
-13. **npm 公開予定がある場合**
+### Phase 4: 案内
+
+16. **npm 公開予定がある場合**
     `package.json` の `"private": true` を削除する旨を案内する
 
-14. **次のステップを案内する**
+17. **次のステップを案内する**
     完了後、以下を伝える:
     - `src/tools/<name>.ts` にツールを追加
     - `src/server.ts` で登録
