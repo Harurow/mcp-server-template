@@ -1,6 +1,9 @@
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
+    format:
+      glob: "*.{ts,tsx}"
+      run: npx biome format --write {staged_files} && git add {staged_files}
     lint-ts:
       glob: "*.{ts,tsx}"
       run: npx oxlint {staged_files} && npx biome check {staged_files}
